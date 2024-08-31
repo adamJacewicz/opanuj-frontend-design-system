@@ -1,24 +1,36 @@
 {
-  "name": "opanuj-frontend-design-system",
+  "name": "@adamJacewicz/design-system",
   "version": "0.1.0",
-  "description": "Design tokens collection for Przeprogramowani Design System",
-  "main": "index.js",
+  "description": "Design system",
+  "license": "MIT",
+  "keywords": ["design-system"],
+  "files": [
+    "dist",
+    "README.md",
+    "LICENSE"
+  ],
+  "exports": {
+    ".": {
+      "import": "./dist/index.mjs",
+      "require": "./dist/index.cjs",
+      "types": "./dist/index.d.ts"
+    }
+  },
+  "engines": {
+    "node": ">=20"
+  },
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "build:tokens": "node build.js"
   },
   "devDependencies": {
-    "@rollup/plugin-node-resolve": "^15.2.3",
-    "@rollup/plugin-replace": "^5.0.5",
-    "@rollup/plugin-typescript": "^11.1.6",
-    "np": "^10.0.3",
-    "rimraf": "^5.0.5",
-    "rollup": "^4.14.1",
-    "rollup-plugin-dts": "^6.1.0",
     "style-dictionary": "^3.9.2",
-    "typescript": "^5.4.5",
-    "vitest": "^1.4.0"
+    "typescript": "^5.4.5"
   },
-  "keywords": [],
-  "author": "",
-  "license": "ISC"
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/adamJacewicz/opanuj-frontend-design-system.git"
+  },
+  "publishConfig": {
+    "access": "public"
+  }
 }
