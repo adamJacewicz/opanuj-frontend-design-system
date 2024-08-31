@@ -3,7 +3,9 @@
   "version": "0.1.0",
   "description": "Design system",
   "license": "MIT",
-  "keywords": ["design-system"],
+  "keywords": [
+    "design-system"
+  ],
   "files": [
     "dist",
     "README.md",
@@ -20,9 +22,13 @@
     "node": ">=20"
   },
   "scripts": {
-    "build:tokens": "node build.js"
+    "build": "npm run build:tokens && npm run test",
+    "test": "echo 'No test specified yet' && exit 0",
+    "build:tokens": "node build.js",
+    "release": "npm run build && np"
   },
   "devDependencies": {
+    "np": "^10.0.7",
     "style-dictionary": "^3.9.2",
     "typescript": "^5.4.5"
   },
