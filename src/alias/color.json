@@ -7,6 +7,9 @@
         },
         "2": {
           "value": "{color.global.grey.26.value}"
+        },
+        "3": {
+          "value": "{color.global.grey.38.value}"
         }
       }
     }
