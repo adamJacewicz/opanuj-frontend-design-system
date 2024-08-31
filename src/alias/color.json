@@ -1,0 +1,14 @@
+{
+  "color": {
+    "alias": {
+      "foreground": {
+        "1": {
+          "value": "{color.global.grey.14.value}"
+        },
+        "2": {
+          "value": "{color.global.grey.26.value}"
+        }
+      }
+    }
+  }
+}
