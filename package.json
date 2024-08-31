@@ -22,15 +22,24 @@
     "node": ">=20"
   },
   "scripts": {
-    "build": "npm run build:tokens && npm run test",
-    "test": "echo 'No test specified yet' && exit 0",
+    "build": "npm run clean && npm run build:tokens && npm run build:bundle && npm run test",
+    "test": "vitest run",
+    "build:bundle": "rollup -c",
     "build:tokens": "node build.js",
+    "clean": "rimraf dist",
     "release": "npm run build && np"
   },
   "devDependencies": {
+    "@rollup/plugin-node-resolve": "^15.2.3",
+    "@rollup/plugin-replace": "^5.0.7",
+    "@rollup/plugin-typescript": "^11.1.6",
     "np": "^10.0.7",
+    "rimraf": "^6.0.1",
+    "rollup": "^4.21.2",
+    "rollup-plugin-dts": "^6.1.1",
     "style-dictionary": "^3.9.2",
-    "typescript": "^5.4.5"
+    "typescript": "^5.4.5",
+    "vitest": "^2.0.5"
   },
   "repository": {
     "type": "git",
