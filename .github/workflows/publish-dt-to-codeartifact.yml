@@ -54,12 +54,19 @@ jobs:
           ca-domain-owner: ${{ env.AWS_CA_DOMAIN_OWNER }}
 
       - name: 'Automated Version Bump'
-        id: bump_version
         uses: 'phips28/gh-action-bump-version@master'
         env:
           GITHUB_TOKEN: ${{ secrets.GH_REPO_ACCESS_TOKEN }}
         with:
           version-type: ${{ github.event.inputs.version-type }}
+
+      - name: Get latest tag
+        id: get_latest_tag
+        run: |
+          # Get the latest tag from the repository
+          latest_tag=$(git describe --tags `git rev-list --tags --max-count=1`)
+          echo "Latest tag is: $latest_tag"
+          echo "::set-output name=tag::$latest_tag"
 
       - name: Publish to registry
         run: |
@@ -72,11 +79,9 @@ jobs:
       - name: Create GitHub Release
         uses: softprops/action-gh-release@v2
         with:
-          draft: false
-          prerelease: false
+          tag_name: ${{ steps.get_latest_tag.outputs.tag }}
           files: |
             dist/**
-          tag_name: ${{ steps.bump_version.outputs.new_tag }}
         env:
           GITHUB_TOKEN: ${{ secrets.GH_REPO_ACCESS_TOKEN }}
 
