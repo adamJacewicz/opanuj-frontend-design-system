@@ -67,8 +67,3 @@ jobs:
           npm set "//$REGISTRY_BASE_URL:_authToken=${{ env.AWS_CA_TOKEN }}"
 
           npm publish
-
-      - name: Create GitHub Release
-        uses: softprops/action-gh-release@v2
-        env:
-          GITHUB_TOKEN: ${{ secrets.GH_REPO_ACCESS_TOKEN }}
