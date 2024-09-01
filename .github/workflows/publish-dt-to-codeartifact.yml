@@ -54,7 +54,6 @@ jobs:
           ca-domain-owner: ${{ env.AWS_CA_DOMAIN_OWNER }}
 
       - name: 'Automated Version Bump'
-        id: bump_version
         uses: 'phips28/gh-action-bump-version@master'
         env:
           GITHUB_TOKEN: ${{ secrets.GH_REPO_ACCESS_TOKEN }}
@@ -71,12 +70,6 @@ jobs:
 
       - name: Create GitHub Release
         uses: softprops/action-gh-release@v2
-        with:
-          draft: false
-          prerelease: false
-          files: |
-            dist/**
-          tag_name: ${{ steps.bump_version.outputs.new_tag }}
         env:
           GITHUB_TOKEN: ${{ secrets.GH_REPO_ACCESS_TOKEN }}
 
