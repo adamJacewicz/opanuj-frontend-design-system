@@ -60,6 +60,14 @@ jobs:
         with:
           version-type: ${{ github.event.inputs.version-type }}
 
+      - name: Get latest tag
+        id: get_latest_tag
+        run: |
+          # Get the latest tag from the repository
+          latest_tag=$(git describe --tags `git rev-list --tags --max-count=1`)
+          echo "Latest tag is: $latest_tag"
+          echo "::set-output name=tag::$latest_tag"
+
       - name: Publish to registry
         run: |
           REGISTRY_BASE_URL="${{ env.AWS_CA_DOMAIN }}-${{ env.AWS_CA_DOMAIN_OWNER }}.d.codeartifact.${{ env.AWS_CA_REGION }}.amazonaws.com/npm/${{ env.AWS_CA_REPOSITORY }}/"
@@ -70,6 +78,10 @@ jobs:
 
       - name: Create GitHub Release
         uses: softprops/action-gh-release@v2
+        with:
+          tag_name: ${{ steps.get_latest_tag.outputs.tag }}
+          files: |
+            dist/**
         env:
           GITHUB_TOKEN: ${{ secrets.GH_REPO_ACCESS_TOKEN }}
 
